@@ -6,7 +6,6 @@
 
 ## Mongo DB on VM instance
 
-
 1. Created MongoDB VM server from using instructions from here [https://github.com/mmckechney/2019AzureMigrateYourApps/tree/master/setupfiles](https://github.com/mmckechney/2019AzureMigrateYourApps/tree/master/setupfiles)
 
     - leveraged the MongoDB image from Bitnami to avoid any MongoDB licensing fees
@@ -43,7 +42,8 @@ mongorestore inventory.bson --db=tailwind -u root -p SaNoFo3FdAx4 -h 52.151.0.33
 1. Created Azure Migration Service in my resource group via the Azure portal
 
 ## Cosmos DB
-https://github.com/chadgms/2019AzureMigrateYourApps/tree/master/Lab1-MigrateYourData#setup-4---create-the-azure-sql-database-instance
+
+<https://github.com/chadgms/2019AzureMigrateYourApps/tree/master/Lab1-MigrateYourData#setup-4---create-the-azure-sql-database-instance>
 
 1. Created CosmosDB via cloud shell
 
@@ -54,16 +54,18 @@ ACCOUNT_NAME_COSMOS=myamigrationcosmos
 az cosmosdb create --resource-group $RESOURCE_GROUP_COSMOS --name $ACCOUNT_NAME_COSMOS --kind MongoDB --locations regionName=$LOCATION_COSMOS
 ```
 
-## SQL Server on VM Instance 
+## SQL Server on VM Instance
 
-1. From Marketplace, used SQL Server 2019 on Windows 2019 base image
-2. Connect to the new VM using RDP 
+1. From Marketplace, used SQL Server 2014 on Windows 2016 base image
+2. Connect to the new VM using RDP
 3. Open a PowerShell window
 4. Download .bacpac file
 
 ```PowerShell
     mkdir C:\temp
-    Invoke-WebRequest https://github.com/mmckechney/2019AzureMigrateYourApps/raw/master/setupfiles/TailwindInventory.bacpac -O c:\temp\TailwindInventory.bacpac1
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    Invoke-WebRequest https://github.com/mmckechney/2019AzureMigrateYourApps/raw/master/setupfiles/TailwindInventory.bacpac -O c:\temp\TailwindInventory.bacpac
 ```
 
 5. Using SQL server Management Studio, click on Databases -> Import Data-tier Application and follow the wizard using `c:\temp\TailwindInventory.bacpac1` as the source
+6. Download and install the Data Migration Assistant: <https://www.microsoft.com/en-us/download/confirmation.aspx?id=53595>
